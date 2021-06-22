@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link, DeleteBin, DeleteButton } from '../util';
 
@@ -22,6 +22,10 @@ const getDate = (date) => {
 function Replies({ reply, updateReply, commentId, replyId, deleteReply }) {
   const [isEdit, setIsEdit] = useState(false);
   const [replyText, setReplyText] = useState(reply.reply);
+
+  useEffect(() => {
+    setReplyText(reply.reply)
+  }, [reply])
 
   const handleUpdateCancel = () => {
     setIsEdit(!isEdit);
