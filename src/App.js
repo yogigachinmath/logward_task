@@ -87,7 +87,6 @@ function App() {
   const renderComments = () => {
     const sortedComments = [...comments];
     if (isAscendingOrder) sortedComments.reverse();
-    console.log(isAscendingOrder, sortedComments);
     return sortedComments.map((comment, index) => (
       <>
         <Comment
@@ -95,8 +94,8 @@ function App() {
           updateComment={updateComment}
           AddReply={AddReply}
           commentId={isAscendingOrder ? sortedComments.length - index - 1 : index}
-          updateReply={updateReply}
           deleteComment={deleteComment}
+          key={index}
         />
         {comment.reply &&
           comment.reply.map((reply, replyIndex) => (
@@ -107,6 +106,7 @@ function App() {
                 commentId={isAscendingOrder ? sortedComments.length - index - 1 : index}
                 replyId={replyIndex}
                 deleteReply={deleteReply}
+                key={`${index}-${replyIndex}`}
               />
             </RepliesContainer>
           ))}

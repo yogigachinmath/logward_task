@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import UserInput from './UserInput';
 import { Link, DeleteBin, DeleteButton } from '../util';
@@ -28,10 +28,13 @@ const getDate = (date) => {
 };
 
 function Comment({ comment, updateComment, commentId, AddReply, deleteComment }) {
-  console.log({ commentId });
   const [isReplyOpen, setIsReplyOpen] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [commentText, setCommentText] = useState(comment.comment);
+
+  useEffect(() => {
+    setCommentText(comment.comment)
+  }, [comment])
 
   const handleUpdateCancel = () => {
     setIsEdit(!isEdit);
